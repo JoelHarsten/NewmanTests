@@ -14,7 +14,7 @@ jobs:
         with:
           files: '["**/*.js"]'
         env:
-          clientSecret: replaceWithSecret
+          clientSecret: ${{ secrets.clientSecret }}
       - name: Run Postman tests with newman
         run: newman run PostmanLab.postman_collection.json -e PostmanLab.postman_environment.json --reporters cli,junit
       - name: Publish Unit Test Results
