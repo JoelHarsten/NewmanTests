@@ -12,11 +12,12 @@ jobs:
         run: sudo npm install newman -g
       - uses: cschleiden/replace-tokens@v1
         with:
-          files: '["**/*.js"]'
+          files: '["**/*.json"]'
         env:
           clientSecret: ${{ secrets.clientSecret }}
       - name: Run Postman tests with newman
         run: newman run PostmanLab.postman_collection.json -e PostmanLab.postman_environment.json --reporters cli,junit
+        continue-on-error: true
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         with:
